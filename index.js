@@ -44,7 +44,7 @@ const middleware = async (req, res, next) => {
 
 app.post('/api/shorturl', middleware,function(req, res) {
   const { url } = req.body;
-  const shortId = nanoid();
+  const shortId = 1;
   urlDatabase[shortId] = url;  
   res.json({ original_url: url, short_url: shortId });
 });
