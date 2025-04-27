@@ -29,22 +29,20 @@ app.get('/api/hello', function(req, res) {
 const middleware = async (req, res, next) => {
     try {
       const { hostname } = new URL(req.body.url);
-      console.log(req.body.url);
-      console.log(req.protocol);
       
       if (req.body.url.startsWith('http://')) {
-        return res.status(400).json({ error: 'Invalid URL' });
+        return res.status(400).json({ error: 'invalid url' });
       }
       
       dns.lookup(hostname, (err, address, family) => {
         if (err) {
           console.error(err);
-          return res.status(400).json({ error: 'Invalid URL' });
+          return res.status(400).json({ error: 'invalid url' });
         }
         next();
       });
     } catch (error) {
-      res.status(400).json({ error: 'Invalid URL' });
+      res.status(400).json({ error: 'invalid url' });
     }
 };
 
