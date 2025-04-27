@@ -31,18 +31,18 @@ const middleware = async (req, res, next) => {
       const { hostname } = new URL(req.body.url);
       
       if (req.body.url.startsWith('http://')) {
-        return res.status(400).json({ error: 'invalid url' });
+        return res.status(200).json({ error: 'invalid url' });
       }
       
       dns.lookup(hostname, (err, address, family) => {
         if (err) {
           console.error(err);
-          return res.status(400).json({ error: 'invalid url' });
+          return res.status(200).json({ error: 'invalid url' });
         }
         next();
       });
     } catch (error) {
-      res.status(400).json({ error: 'invalid url' });
+      res.status(200).json({ error: 'invalid url' });
     }
 };
 
