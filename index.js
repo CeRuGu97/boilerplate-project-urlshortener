@@ -29,7 +29,7 @@ app.get('/api/hello', function(req, res) {
 const middleware = async (req, res, next) => {
     try {
       const { hostname } = new URL(req.body.url);
-      if (hostname === 'www.example.com') {
+      if (req.protocol === 'http') {
         return res.status(400).json({ error: 'Invalid URL' });
       }
       
