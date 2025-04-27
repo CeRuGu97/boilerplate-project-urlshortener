@@ -29,6 +29,9 @@ app.get('/api/hello', function(req, res) {
 const middleware = async (req, res, next) => {
     try {
       const { hostname } = new URL(req.body.url);
+      if (hostname === 'http://www.example.com') {
+        return res.status(400).json({ error: 'Invalid URL' });
+      }
       
       dns.lookup(hostname, (err, address, family) => {
         if (err) {
